@@ -1,0 +1,68 @@
+window {
+    font-family: "Fira Code Nerd Font", "Cartograph CF Nerd Font", monospace;
+    font-size: 14pt;
+    color: #cdd6f4;
+    background-color: rgba(30, 30, 46, 0.66);
+}
+
+button {
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 25%;
+    border: none;
+    background-color: #11111b;
+    margin: 5px;
+    transition: box-shadow 0.2s ease-in-out, background-color 0.2s ease-in-out;
+}
+
+button:hover {
+    background-color: #b4befe;
+    color: black;
+}
+
+button:focus {
+    background-color: rgba(180, 190, 254, 0.6);
+    color: #1e1e2e;
+}
+
+#lock {
+    background-image: image(url("./lock.png"));
+}
+#lock:focus, #lock:hover {
+    background-image: image(url("./lock-hover.png"));
+}
+
+#logout {
+    background-image: image(url("./logout.png"));
+}
+#logout:focus, #logout:hover {
+    background-image: image(url("./logout-hover.png"));
+}
+
+#suspend {
+    background-image: image(url("./sleep.png"));
+}
+#suspend:focus, #suspend:hover {
+    background-image: image(url("./sleep-hover.png"));
+}
+
+#shutdown {
+    background-image: image(url("./power.png"));
+}
+#shutdown:focus, #shutdown:hover {
+    background-image: image(url("./power-hover.png"));
+}
+
+#reboot {
+    background-image: image(url("./restart.png"));
+}
+#reboot:focus, #reboot:hover {
+    background-image: image(url("./restart-hover.png"));
+}
+
+#abort {
+
+}
+#abort:focus, #abort:hover {
+
+}

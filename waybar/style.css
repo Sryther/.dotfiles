@@ -1,0 +1,177 @@
+@import "mocha.css";
+
+* {
+    color: @text;
+    border: none;
+    border-radius: 0;
+    font-family: "Fira Code Nerd Font", "Cartograph CF Nerd Font", monospace;
+    font-size: 12px;
+    min-height: 0;
+}
+
+window#waybar {
+    background-color: shade(@base, 0.9);
+    border: 2px solid alpha(@crust, 0.3);
+    border-radius: 10px;
+}
+
+tooltip {
+    background: @overlay0;
+    color: @text;
+}
+
+#workspaces {
+    background: @surface0;
+    border-radius: 10px;
+}
+
+#workspaces button {
+    padding: 5px;
+    color: @text;
+    margin-right: 5px;
+    border-radius: 10px;
+}
+
+#workspaces button.active {
+    background: @surface1;
+    color: @lavender;
+}
+
+#workspaces button.focused {
+    border-radius: 10px;
+}
+
+#workspaces button.urgent {
+    color: #11111b;
+    background: #a6e3a1;
+    border-radius: 10px;
+}
+
+#workspaces button:hover {
+    background: @surface2;
+    color: #cdd6f4;
+    border-radius: 10px;
+}
+
+#taskbar,
+#clock,
+#memory,
+#cpu,
+#battery,
+#pulseaudio,
+#pulseaudio-slider,
+#network,
+#workspaces,
+#tray,
+#temperature,
+#custom-media,
+#idle_inhibitor,
+#custom-wlogout,
+#bluetooth,
+#backlight {
+    background: @surface0;
+    padding: 0px 10px;
+    margin: 3px 0px;
+    margin-top: 3px;
+    border: 1px solid #181825;
+    border-left: 0px;
+    border-right: 0px;
+}
+
+#taskbar {
+    border-radius: 10px;
+    padding: 0px;
+}
+
+#taskbar button.active {
+    background: @lavender;
+}
+
+#taskbar button:first-child {
+    border-radius: 10px 0px 0px 10px;
+}
+
+#taskbar button:last-child {
+    border-radius: 0px 10px 10px 0px;
+}
+
+#taskbar button:only-child {
+    border-radius: 10px;
+}
+
+#tray {
+    border-radius: 10px;
+    margin-right: 5px;
+    min-width: 10px
+}
+
+#workspaces {
+    background: #1e1e2e;
+    border-radius: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+    padding-right: 0px;
+    padding-left: 5px;
+}
+
+#window {
+    border-radius: 10px;
+    margin-right: 10px;
+    margin-left: 10px;
+}
+
+#bluetooth.connected {
+   color: #a6e3a1;
+}
+#bluetooth.on {
+    color: #0082FC;
+}
+
+#bluetooth.off {
+    color: red;
+}
+
+#clock {
+    color: #fab387;
+}
+
+#custom-wlogout {
+    border-radius: 0px 10px 10px 0px;
+    margin-right: 5px;
+}
+
+#cpu {
+    border-right: 0px;
+}
+
+#memory {
+    border-right: 0px;
+    border-left: 0px;
+}
+
+#temperature {
+    border-left: 0px;
+}
+
+#network {
+    color: #f9e2af;
+}
+
+#pulseaudio {
+    color: #89b4fa;
+    border-left: 0px;
+    border-right: 0px;
+}
+
+#pulseaudio.microphone {
+    color: #cba6f7;
+}
+
+#battery {
+    color: #a6e3a1;
+    border-left: 0px;
+}
+
+#idle_inhibitor {
+    border-radius: 10px 0px 0px 10px;
+}

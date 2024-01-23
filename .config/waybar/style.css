@@ -1,177 +1,223 @@
 @import "mocha.css";
 
+/** Global **/
 * {
     color: @text;
     border: none;
     border-radius: 0;
-    font-family: "Fira Code Nerd Font", "Cartograph CF Nerd Font", monospace;
+    font-family: "Fira Code", "Font Awesome 5 Free", monospace;
     font-size: 12px;
     min-height: 0;
 }
-
 window#waybar {
-    background-color: shade(@base, 0.9);
-    border: 2px solid alpha(@crust, 0.3);
-    border-radius: 10px;
+    background-color: @surface0;
+    padding: 0;
+    margin: 0;
 }
 
+/** Tooltips **/
 tooltip {
-    background: @overlay0;
+    background: @crust;
     color: @text;
 }
 
-#workspaces {
-    background: @surface0;
-    border-radius: 10px;
-}
-
-#workspaces button {
-    padding: 5px;
-    color: @text;
-    margin-right: 5px;
-    border-radius: 10px;
-}
-
-#workspaces button.active {
-    background: @surface1;
-    color: @lavender;
-}
-
-#workspaces button.focused {
-    border-radius: 10px;
-}
-
-#workspaces button.urgent {
-    color: #11111b;
-    background: #a6e3a1;
-    border-radius: 10px;
-}
-
-#workspaces button:hover {
-    background: @surface2;
-    color: #cdd6f4;
-    border-radius: 10px;
-}
-
+/** All modules **/
+#workspaces,
 #taskbar,
-#clock,
-#memory,
-#cpu,
-#battery,
+#image,
+#custom-spotify,
+#tray,
+#idle_inhibitor,
 #pulseaudio,
 #pulseaudio-slider,
-#network,
-#workspaces,
-#tray,
-#temperature,
-#custom-media,
-#idle_inhibitor,
-#custom-wlogout,
 #bluetooth,
-#backlight {
-    background: @surface0;
-    padding: 0px 10px;
-    margin: 3px 0px;
-    margin-top: 3px;
-    border: 1px solid #181825;
-    border-left: 0px;
-    border-right: 0px;
+#network,
+#backlight,
+#memory,
+#cpu,
+#temperature,
+#battery,
+#custom-weather,
+#clock,
+#custom-wlogout {
+    padding: 0px 8px;
 }
 
+/** ==========
+    Start LEFT
+    ========== **/
+
+/** Workspaces **/
+#workspaces {
+    padding: 3px;
+    margin: 0px 10px 0px 3px;
+    padding: 0px 3px 0px 3px;
+}
+#workspaces button {
+    padding: 10px 6px 10px 6px;
+    background-color: transparent;
+    border: none;
+}
+#workspaces button:hover {
+    color: @lavender;
+}
+#workspaces button.active {
+    color: @lavender;
+}
+#workspaces button.urgent {
+    background-color: @red;
+}
+
+/** Taskbar **/
 #taskbar {
-    border-radius: 10px;
     padding: 0px;
 }
-
 #taskbar button.active {
     background: @lavender;
 }
-
-#taskbar button:first-child {
-    border-radius: 10px 0px 0px 10px;
+#taskbar.empty {
+    padding: 5px;
 }
 
-#taskbar button:last-child {
-    border-radius: 0px 10px 10px 0px;
+/** Image Album art **/
+#image {
+    background-color: @green;
+    margin-right: 0px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    padding: 0px 0px 0px 3px;
 }
 
-#taskbar button:only-child {
-    border-radius: 10px;
+/** Spotify **/
+#custom-spotify {
+    background-color: @green;
+    color: @crust;
+    padding-left: 0px;
 }
 
-#tray {
-    border-radius: 10px;
-    margin-right: 5px;
-    min-width: 10px
-}
+/** ========
+    End LEFT
+    ======== **/
 
-#workspaces {
-    background: #1e1e2e;
-    border-radius: 10px;
-    margin-left: 10px;
-    margin-right: 10px;
-    padding-right: 0px;
-    padding-left: 5px;
-}
+/** ============
+    Start CENTER
+    ============ **/
 
+/** Window **/
 #window {
     border-radius: 10px;
     margin-right: 10px;
     margin-left: 10px;
 }
 
-#bluetooth.connected {
-   color: #a6e3a1;
-}
-#bluetooth.on {
-    color: #0082FC;
-}
+/** ==========
+    End CENTER
+    ========== **/
 
-#bluetooth.off {
-    color: red;
-}
+/** ===========
+    Start RIGHT
+    =========== **/
 
-#clock {
-    color: #fab387;
-}
-
-#custom-wlogout {
-    border-radius: 0px 10px 10px 0px;
+/** Tray **/
+#tray {
+    border-radius: 10px;
     margin-right: 5px;
+    min-width: 10px;
+    background-color: transparent;
+    border: 0px;
 }
 
-#cpu {
-    border-right: 0px;
-}
-
-#memory {
-    border-right: 0px;
-    border-left: 0px;
-}
-
-#temperature {
-    border-left: 0px;
-}
-
-#network {
-    color: #f9e2af;
-}
-
-#pulseaudio {
-    color: #89b4fa;
-    border-left: 0px;
-    border-right: 0px;
-}
-
-#pulseaudio.microphone {
-    color: #cba6f7;
-}
-
-#battery {
-    color: #a6e3a1;
-    border-left: 0px;
-}
-
+/** Idle Inhibitor **/
 #idle_inhibitor {
     border-radius: 10px 0px 0px 10px;
 }
+
+/** Bluetooth **/
+#bluetooth.connected {
+   background-color: @green;
+   color: @crust;
+}
+#bluetooth.on {
+    color: @blue;
+}
+#bluetooth.off {
+    color: @red;
+}
+
+/** PulseAudio **/
+#pulseaudio {
+    color: @blue;
+    border-left: 0px;
+    border-right: 0px;
+}
+#pulseaudio.microphone {
+    padding-left: 0;
+}
+
+/** Network **/
+#network {
+    color: @green;
+}
+
+/** CPU **/
+#cpu {
+    color: @lavender;
+    border-right: 0px;
+    padding-right: 4px;
+}
+
+/** Memory **/
+#memory {
+    color: @lavender;
+    border-right: 0px;
+    border-left: 0px;
+    padding-left: 4px;
+    padding-right: 4px;
+}
+
+/** Temperature **/
+#temperature {
+    color: @lavender;
+    border-left: 0px;
+    padding-left: 4px;
+}
+#temperature.critical {
+    color: @crust;
+    background-color: @red;
+}
+
+/** Battery **/
+#battery {
+    color: @green;
+    border-left: 0px;
+}
+
+/** Weather **/
+#custom-weather {
+    color: @crust;
+    background-color: @red;
+    padding-left: 5px;
+}
+
+/** Clock **/
+#clock {
+    color: @crust;
+    background-color: @red;
+}
+
+/** Custom Events **/
+#custom-events {
+    background-color: @red;
+    color: @crust;
+    padding-right: 6px;
+}
+
+/** wlogout **/
+#custom-wlogout {
+    margin-right: 4px;
+    border-radius: 0px 10px 10px 0px;
+}
+
+/** =========
+    End RIGHT
+    ========= **/

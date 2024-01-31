@@ -57,6 +57,7 @@ tooltip {
     padding: 10px 6px 10px 6px;
     background-color: transparent;
     border: none;
+    color: white;
 }
 #workspaces button:hover {
     color: @lavender;
@@ -67,6 +68,9 @@ tooltip {
 #workspaces button.urgent {
     background-color: @red;
 }
+#workspaces button.persistant {
+    color: @lavender;
+}
 
 /** Taskbar **/
 #taskbar {
@@ -74,6 +78,15 @@ tooltip {
 }
 #taskbar button.active {
     background: @lavender;
+}
+#taskbar button.fullscreen {
+    background: @green;
+}
+#taskbar button.maximized {
+    background: @blue;
+}
+#taskbar button.minimized {
+    background: @crust;
 }
 #taskbar.empty {
     padding: 5px;
@@ -86,6 +99,9 @@ tooltip {
     margin-top: 0px;
     margin-bottom: 0px;
     padding: 0px 0px 0px 3px;
+}
+#image.empty {
+    background-color: transparent;
 }
 
 /** Spotify **/

@@ -50,7 +50,7 @@
             "1": ["eDP-1"],
             "2": ["eDP-1"],
             "3": ["eDP-1"],
-            "4": ["desc:Acer Technologies VG242Y P 0x21018E64"]
+            "4": ["DP-9"]
         },
         "sort-by-coordinates": true,
         "sort-by-number": false,
@@ -59,9 +59,10 @@
     "wlr/taskbar": {
         "format": "{icon}",
         "icon-size": 16,
-        "tooltip-format": "{name}",
+        "tooltip-format": "{name} ({state})",
         "on-click": "activate",
         "on-click-middle": "close",
+        "on-click-right": "minimize",
         "rewrite": {
             "Firefox Web Browser": "Firefox"
         },
@@ -71,8 +72,9 @@
     },
     "image#album-art": {
          "exec":"$HOME/.config/waybar/scripts/album_art.sh",
-         "interval": 5,
+         "interval": 3,
          "size": 32,
+         "tooltip": true
     },
     "custom/spotify": {
         "format": "{icon} {}",
@@ -195,6 +197,7 @@
     "custom/weather": {
         "exec": "$HOME/.config/waybar/scripts/get_weather.sh Cox",
         "return-type": "json",
+        "on-click": "gnome-weather",
         "format": "{}",
         "tooltip": true,
         "interval": 3600
@@ -202,6 +205,7 @@
     "clock": {
         "format": "{:%d/%m %H:%M}",
         "tooltip-format": "<tt>{calendar}</tt>",
+        "on-click": "gnome-calendar",
         "calendar": {
             "format": {
                 "months": "<span color='#ffead3'><b>{}</b></span>",
@@ -220,7 +224,8 @@
             "default": ""
         },
         "exec": "python $HOME/.config/waybar/scripts/waybar-khal.py",
-        "return-type": "json"
+        "return-type": "json",
+        "on-click": "gnome-calendar"
     },
     "custom/wlogout": {
         "format": "",

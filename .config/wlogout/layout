@@ -1,6 +1,6 @@
 {
     "label" : "lock",
-    "action" : "waylock",
+    "action" : "swaylock",
     "text" : "Lock",
     "keybind" : "l"
 }
@@ -18,7 +18,7 @@
 }
 {
     "label" : "logout",
-    "action" : "hyprctl dispatch exit 0",
+    "action" : "wayland-logout",
     "text" : "Logout",
     "keybind" : "e"
 }

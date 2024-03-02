@@ -71,6 +71,8 @@ tooltip {
 #workspaces button.persistant {
     color: @lavender;
 }
+#workspaces button.hidden {
+}
 
 /** Taskbar **/
 #taskbar {

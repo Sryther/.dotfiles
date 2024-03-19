@@ -27,7 +27,7 @@ function check() {
         _message_="$1"
         _end_job_=$(date +%s)
 	echo "$(date) $_message_" >> $_LOG_FILE_
-        summary $_start_job_ $_end_job_ 'failed' && dunstify -u critical -t 3000 -a "Screenshot Tool" "Screensht failed: $_message_" >> $_LOG_FILE_ 2>&1
+        summary $_start_job_ $_end_job_ 'failed' && dunstify -u critical -t 3000 -a "Screenshot Tool" "Screensht failed:"$'\n'"$_message_" >> $_LOG_FILE_ 2>&1
         exit 1
     fi
 }
@@ -104,7 +104,7 @@ function summary() {
     hours=$((_runtime_job_ / 3600)); minutes=$(( (_runtime_job_ % 3600) / 60 )); seconds=$(( (_runtime_job_ % 3600) % 60 ))
 
     if [[ $3 != "failed" ]]; then
-        wl-copy < "$_target_file_" >> $_LOG_FILE_ 2>&1
+        wl-copy --type 'image/png' < "$_target_file_" >> $_LOG_FILE_ 2>&1
 
         message="${_notif_message_} Runtime: $hours hours, $minutes minutes, $seconds seconds"
         dunstify -i "$_target_file_" -t 10000 "Screenshot Tool" "$message" -a "Screenshot Tool"
@@ -119,12 +119,10 @@ function main() {
     _screenshot_command_="$1"
     _notif_message_="$2"
 
-    _res_=$($_screenshot_command_ -f $_start_job_.png 2>&1)
+    _res_=$($_screenshot_command_ --filename $_start_job_.png 2>&1)
     check "$_res_"
-
     get_latest_img
     convert
-
     mv $_LATEST_IMAGE_ $_ORIGINAL_DIR_
 
     _end_job_=$(date +%s)
@@ -145,9 +143,10 @@ then
 elif [ "$1" = 'full' ];
 then
 	msg="Full screenshot saved and copied to clipboard!"
-	HYPRSHOT_DIR="$HOME/Pictures/Screenshots" main 'hyprshot -m output' "${msg}"
+	HYPRSHOT_DIR="$HOME/Pictures/Screenshots" main 'hyprshot --clipboard-mode=no --silent --mode output' "${msg}"
 elif [ "$1" = 'area' ];
 then
+        #monitor_name=$(hyprctl monitors -j | jq -r '.[] | select(.focused == true) | .name')
 	msg='Area screenshot saved and copied to clipboard!'
-	HYPRSHOT_DIR="$HOME/Pictures/Screenshots" main 'hyprshot -m region' "${msg}"
+	HYPRSHOT_DIR="$HOME/Pictures/Screenshots" main "hyprshot --clipboard-mode=no --silent --mode region" "${msg}"
 fi

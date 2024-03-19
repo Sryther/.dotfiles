@@ -77,18 +77,23 @@ tooltip {
 /** Taskbar **/
 #taskbar {
     padding: 0px;
+    color: @crust;
 }
 #taskbar button.active {
     background: @lavender;
+    color: @crust;
 }
 #taskbar button.fullscreen {
     background: @green;
+    color: @crust;
 }
 #taskbar button.maximized {
     background: @blue;
+    color: @crust;
 }
 #taskbar button.minimized {
     background: @crust;
+    color: white;
 }
 #taskbar.empty {
     padding: 5px;

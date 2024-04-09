@@ -18,7 +18,7 @@
 }
 {
     "label" : "logout",
-    "action" : "WAYLAND_DISPLAY=/run/user/1000/wayland-1 wayland-logout",
+    "action" : "wayland-logout",
     "text" : "Logout",
     "keybind" : "e"
 }

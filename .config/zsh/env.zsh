@@ -99,3 +99,7 @@ eval "$(pyenv init -)"
 export DOCKER_CONFIG="$HOME/.docker"
 
 export PATH=$PATH:/home/paul/.spicetify
+
+export GEM_HOME=$HOME/gems
+export PATH=$HOME/gems/bin:$PATH
+

@@ -129,7 +129,8 @@
         "format-muted": "",
         "format-icons": {
             "headphone": ["", "", "", ""],
-            "default": ["", "", "", ""]
+            "default": ["", "", "", ""],
+            "muted": [""]
         },
         "scroll-step": 2,
         "on-click": "pavucontrol",
@@ -186,11 +187,12 @@
             "warning": 20,
             "critical": 10
         },
-        "format": "{icon}",
+        "format": "{icon}{capacity}%",
         "format-icons": [" ", " ", " ", " ", " "],
         "format-time": "{H}h{M}m",
-        "format-charging": "{icon} {capacity}%",
-        "format-full": "{icon}",
+        "format-charging": " {icon}{capacity}%",
+        "format-plugged": "",
+        "format-full": " {icon}",
         "interval": 30,
         "tooltip": true,
         "tooltip-format": "{capacity}% - {timeTo}",

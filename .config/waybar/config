@@ -11,8 +11,10 @@
     "modules-left": [
         "hyprland/workspaces",
         "wlr/taskbar",
-        "image#album-art",
-        "custom/spotify"
+        "image#album-art-spotify",
+        "custom/spotify",
+        "image#album-art-youtube",
+        "custom/youtube"
     ],
 
     "modules-center": ["hyprland/window"],
@@ -24,6 +26,7 @@
         "pulseaudio",
         "pulseaudio#microphone",
         "network",
+        "custom/nmvpn",
         "backlight",
         "cpu",
         "memory",
@@ -37,14 +40,14 @@
 
 
     "hyprland/workspaces": {
-        "format": "<span color=\"#b4befe\">{icon}</span>",
+        "format": "{icon}",
         "icon-size": 16,
         "on-scroll-up": "hyprctl dispatch workspace e+1",
         "on-scroll-down": "hyprctl dispatch workspace e-1",
         "format-icons": {
-            "urgent": "",
-            "active": "",
-            "default": "",
+            "urgent": "",
+            "active": "",
+            "default": "",
         },
         "persistent-workspaces": {
             "1": ["eDP-1"],
@@ -72,24 +75,40 @@
             "xwaylandvideobridge"
         ]
     },
-    "image#album-art": {
-         "exec":"$HOME/.config/waybar/scripts/album_art.sh",
+    "image#album-art-spotify": {
+         "exec":"$HOME/.config/waybar/scripts/album_art.sh spotify",
          "interval": 3,
          "size": 32,
          "tooltip": true
     },
     "custom/spotify": {
-        "format": "{icon} {}",
+        "format": " {0} {2}",
         "escape": true,
         "return-type": "json",
         "max-length": 40,
         "on-click": "playerctl -p spotify play-pause",
-        "on-click-right": "killall spotify",
-        "smooth-scrolling-threshold": 10,
-        "on-scroll-up" : "playerctl -p spotify next",
-        "on-scroll-down" : "playerctl -p spotify previous",
-        "exec": "python3 $HOME/.config/waybar/scripts/mediaplayer.py --player spotify",
+        "_on-click-right": "killall spotify",
+        "_smooth-scrolling-threshold": 10,
+        "_on-scroll-up" : "playerctl -p spotify next",
+        "_on-scroll-down" : "playerctl -p spotify previous",
+        "exec": "python $HOME/.config/waybar/scripts/mediaplayer.py --player spotify 2> /dev/null",
         "exec-if": "pgrep spotify"
+    },
+    "image#album-art-youtube": {
+         "exec":"$HOME/.config/waybar/scripts/album_art.sh firefox",
+         "interval": 3,
+         "size": 32,
+         "tooltip": true
+    },
+    "custom/youtube": {
+        "format": " {0} {1}",
+        "escape": true,
+        "return-type": "json",
+        "max-length": 24,
+        "on-click": "playerctl -p firefox play-pause",
+        "smooth-scrolling-threshold": 10,
+        "exec": "python3 $HOME/.config/waybar/scripts/mediaplayer.py --player firefox 2> /dev/null",
+        "exec-if": "playerctl --list-all | grep firefox"
     },
 
 
@@ -113,24 +132,24 @@
         }
     },
     "bluetooth": {
-	"format": "",
+	"format": "󰂯",
 	"format-disabled": "",
-	"format-connected": "",
+	"format-connected": "󰂯",
 	"tooltip-format": "{controller_alias}\t{controller_address}",
 	"tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{device_enumerate}",
 	"tooltip-format-enumerate-connected": "{device_alias}\t{device_address}",
         "on-click": "/usr/bin/python /usr/bin/blueman-manager"
     },
     "pulseaudio": {
-        "format": "{icon} {volume}%",
-        "format-bluetooth": "{icon} {volume}%",
+        "format": "{icon}  {volume}%",
+        "format-bluetooth": "{icon} 󰂯 {volume}%",
         "format-alt": "{icon} {volume}%",
         "format-alt-click": "click-right",
-        "format-muted": "",
+        "format-muted": " ",
         "format-icons": {
-            "headphone": ["", "", "", ""],
+            "headphone": ["", "", "", ""],
             "default": ["", "", "", ""],
-            "muted": [""]
+            "muted": [""]
         },
         "scroll-step": 2,
         "on-click": "pavucontrol",
@@ -139,23 +158,37 @@
     "pulseaudio#microphone": {
         "format": "{format_source}",
         "tooltip": false,
-        "format-source": "",
-        "format-source-muted": "",
+        "format-source": "󰍬",
+        "format-source-muted": "󰍭",
         "on-click": "pamixer --default-source -t"
     },
     "network": {
 	"format": "Unknown",
-        "format-wifi": "  {signalStrength}%",
-        "format-ethernet": " {ifname}",
-        "format-disconnected": "⚠ Disconnected",
-        "format-disabled": "Disabled",
-        "on-click": "iwgtk",
+        "format-icons": ["󰤯 ", "󰤟 ", "󰤢 ", "󰤥 ", "󰤨 "],
+        "format-wifi": "{icon}",
+        "format-ethernet": " ",
+        "format-disconnected": "󰤮 ",
+        "format-disabled": "",
+        "on-click": "networkmanager_dmenu --conf ~/.config/wofi/config/config --style ~/.config/wofi/src/mocha/style.css --lines 20 --columns 1 --insensitive --monitor",
+        "_on-click": "nm-connection-editor",
         "tooltip": true,
         "tooltip-format": "Unknown",
-        "tooltip-format-ethernet": "{ipaddr}",
-        "tooltip-format-wifi": "{ipaddr} - {essid}",
-        "tooltip-format-disconnected": "",
-        "tooltip-format-disabled": ""
+        "tooltip-format-ethernet": "{ifname} - {ipaddr}",
+        "tooltip-format-wifi": "{essid} {signalStrength}% - {ipaddr}",
+        "tooltip-format-disconnected": "Disconnected",
+        "tooltip-format-disabled": "Disabled"
+    },
+    "custom/nmvpn": {
+        "format": "{icon}",
+        "return-type": "json",
+        "exec": "/usr/local/bin/waybar-nmvpn",
+        "on-click": "networkmanager_dmenu --search VPN --conf ~/.config/wofi/config/config --style ~/.config/wofi/src/mocha/style.css --lines 5 --columns 1 --insensitive",
+        "format-icons": {
+            "connected": "",
+            "disconnected": "",
+            "none": "",
+            "error": "⚠"
+        }
     },
     "backlight": {
         "format": "{icon}",
@@ -187,12 +220,12 @@
             "warning": 20,
             "critical": 10
         },
-        "format": "{icon}{capacity}%",
+        "format": "{icon} {capacity}%",
         "format-icons": [" ", " ", " ", " ", " "],
         "format-time": "{H}h{M}m",
-        "format-charging": " {icon}{capacity}%",
+        "format-charging": " {capacity}%",
         "format-plugged": "",
-        "format-full": " {icon}",
+        "format-full": "{icon} {capacity}%",
         "interval": 30,
         "tooltip": true,
         "tooltip-format": "{capacity}% - {timeTo}",
@@ -232,7 +265,7 @@
         "on-click": "gnome-calendar"
     },
     "custom/wlogout": {
-        "format": "",
+        "format": "⏻",
         "interval": "once",
         "on-click": "$HOME/.config/waybar/scripts/wlogout.sh",
     }

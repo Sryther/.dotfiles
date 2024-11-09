@@ -1,7 +1,11 @@
 #!/bin/bash
 
-album_art=$(playerctl -p spotify metadata mpris:artUrl 2> /dev/null)
-album_name_and_artist=$(playerctl -p spotify metadata xesam:album 2> /dev/null)-$(playerctl -p spotify metadata xesam:artist 2> /dev/null)
+player=$1
+if [ "$player" = "" ]; then
+  player=spotify
+fi
+album_art=$(playerctl -p $player metadata mpris:artUrl 2> /dev/null)
+album_name_and_artist=$(playerctl -p $player metadata xesam:album 2> /dev/null)-$(playerctl -p $player metadata xesam:artist 2> /dev/null)
 
 mkdir -p /tmp/covers
 
@@ -17,5 +21,10 @@ if [ -f "${path}" ]; then
     exit 0
 fi
 
-curl -s  "${album_art}" --output "${path}"
+if [[ ! "$album_art" =~ "file://" ]]; then
+  curl -s "${album_art}" --output "${path}"
+else
+  path=$(echo $album_art | sed 's/file:\/\///')
+fi
+
 echo "${path}"

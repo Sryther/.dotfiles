@@ -102,4 +102,5 @@ export PATH=$PATH:/home/paul/.spicetify
 
 export GEM_HOME=$HOME/gems
 export PATH=$HOME/gems/bin:$PATH
-
+export GOPATH=$HOME/go
+export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"

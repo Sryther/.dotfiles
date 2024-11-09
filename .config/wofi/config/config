@@ -9,5 +9,5 @@ print_command=true
 insensitive=true
 prompt=
 columns=2
-allow_images=false
+allow_images=true
 
